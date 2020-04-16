@@ -1,0 +1,32 @@
+
+
+#include <iostream>
+ 
+int Func(int n, int k) {
+    int tmp = n, count = 0, result = 0;
+    while (tmp > 0) {
+        tmp /= 10;
+        count++;
+    }
+    int * Array = new int[count];
+    for (int i(0); i < count; i++) {
+        Array[i] = n % 10;
+        n /= 10;
+    }
+ 
+    for (int i(count - 1), step(0); i > count - k - 1; i--,step++) {
+        result += Array[step + 1] * powf(10, step);
+    }
+    delete[] Array;
+    return result;
+}
+ 
+int main() {
+    int check;
+    check = Func(12345, 4);
+    std::cout << check;
+    std::cin.ignore();
+    return 0;
+}
+
+
