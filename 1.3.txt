@@ -1,0 +1,93 @@
+#include <iostream>
+#include <cctype>
+#include <windows.h>
+ 
+using namespace std;
+ 
+void messege();
+ 
+int main(int argc, const char * argv[]) {
+     
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+     
+    int size;
+    char string[255];
+    char switcher;
+    cout << "Enter the string: ";
+    gets_s(string);
+    size = strlen(string);
+ 
+    for (;;)
+    {
+        cout << endl << endl << "Your source line: " << string;
+        messege();
+        cout << "\nYour choice: ";
+        cin >> switcher;
+        switch (switcher)
+        {
+        case '1':
+            cout << "That's what happened: ";
+            for (int i = 0; i < size; i++)
+                cout << (char)toupper(string[i]);
+            break;
+        case '2':
+            cout << "That's what happened: ";
+            for (int i = 0; i < size; i++)
+                cout << (char)tolower(string[i]);
+            break;
+        case '3':
+            cout << "That's what happened: ";
+            cout << (char)toupper(string[0]);
+            for (int i = 1; i < size; i++)
+            {
+                if (string[i] == ' ')
+                {
+                    cout << string[i];
+                    string[i + 1] = (char)toupper(string[i + 1]);
+                    cout << string[i+1];
+                    i++;
+                }
+                else if (string[i] != ' ')
+                    cout << string[i];
+            }
+            break;
+        case '4':
+            cout << "That's what happened: ";
+        cout << (char)tolower(string[0]);
+                for (int i = 1; i < size; i++)
+                {
+                    if (string[i] == ' ')
+                    {
+                        cout << string[i];
+                        string[i + 1] = (char)tolower(string[i + 1]);
+                        cout << (char)tolower(string[i + 1]);
+                        i++;
+                    }
+                    else
+                        cout << (char)toupper(string[i]);
+            }
+                break;
+        case '5':
+            cout << "That's what happened: ";
+            cout << (char)toupper(string[0]);
+            for (int i = 1; i < size; i++)
+                cout << string[i];
+            break;
+    }
+        if (switcher == 'f' || switcher == 'F' || switcher == 'ô'|| switcher == 'Ô')
+            break;
+}
+ 
+    system("pause");
+    return 0;
+}
+void messege() {
+ 
+    cout << "\nAll letters are large - click 1: ";
+    cout << "\nAll pumpkins are small - click 2: ";
+    cout << "\nA capital letter (the first letter of each word in a string) - click 3: ";
+    cout << "\nThe first letter of each word is small - click 4: ";
+    cout << "\nAs in the sentence (with a capital letter) - press 5: ";
+    cout << "\nExit the program - press' f': ";
+}
