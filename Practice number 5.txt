@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
     float y, y1;
     float x;
      
-    cout << "Ведите x: ";
+    cout << "enter x: ";
     cin >> x;
     y=x;
     do {
