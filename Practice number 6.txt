@@ -1,0 +1,99 @@
+
+#include <vcl.h>
+#include <iostream>
+#include <string>
+#include <fstream.h>
+#pragma hdrstop
+ 
+//---------------------------------------------------------------------------
+class Worker
+{
+private:
+        string lastName;
+        unsigned int experience;
+        unsigned int salaryPerHour;
+        unsigned int salaryForWorkTime;
+        unsigned int workTime;
+        double award;
+public:
+        void Set (string wLastName, unsigned int wExperience, unsigned int wSalaryPerHour,
+                  unsigned int wWorkTime)
+        {
+            lastName = wLastName;
+            experience = wExperience;
+            salaryPerHour = wSalaryPerHour;
+            workTime = wWorkTime;
+            salaryForWorkTime = salaryPerHour * workTime;
+            if( experience < 1 )
+                award=0.0;
+            else if( experience < 3)
+                 {
+                    award=(double)(salaryForWorkTime * 5)/100.0;
+                 }
+            else if( experience < 5 )
+                 {
+                    award=(double)(salaryForWorkTime * 8)/100.0;
+                 }
+                 else
+                 {
+                    award=(double)(salaryForWorkTime * 15)/100.0;
+                 }
+ 
+ 
+        }
+        void Get ()
+        {
+            cout<<"Last Name: "<< lastName <<"\nExperience: "<<experience
+            <<"\nSalary per hour: "<<salaryPerHour<<"\nWorkTime: "<<workTime<<
+            "\nSalary for work time: "<<salaryForWorkTime<<"\nAward: "<<award<<endl;
+        }
+ 
+        bool SaveToFile ( char const* fileName )
+        {
+            ofstream fout( fileName );
+            if(!fout.is_open())
+                return false;
+            fout<<"Last Name: "<< lastName <<"\nExperience: "<<experience
+            <<"\nSalary per hour: "<<salaryPerHour<<"\nWorkTime: "<<workTime<<
+            "\nSalary for work time: "<<salaryForWorkTime<<"\nAward: "<<award<<endl;
+            fout.close();
+            return true;
+        }
+ 
+};
+#pragma argsused
+int main(int argc, char* argv[])
+{
+    string lastName;
+    unsigned int experience;
+    unsigned int salaryPerHour;
+    unsigned int workTime;
+    double award;
+ 
+    cout<<"Enter last name: ";
+    cin>>lastName;
+    cout<<endl;
+    cout<<"Enter experience: ";
+    cin>>experience;
+    cout<<endl;
+    cout<<"Enter salary per hour: ";
+    cin>>salaryPerHour;
+    cout<<endl;
+    cout<<"Enter work time: ";
+    cin>>workTime;
+    cout<<endl;
+ 
+    Worker objWorker;
+    objWorker.Set(lastName, experience, salaryPerHour, workTime);
+    objWorker.Get();
+    bool isSaved = objWorker.SaveToFile("save.txt");
+    if(isSaved)
+    {
+        cout<<"File successfully saved"<<endl;
+    }
+    else
+        cout<<"File NOT saved"<<endl;
+ 
+    system("pause");
+    return 0;
+}
